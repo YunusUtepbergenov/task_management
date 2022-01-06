@@ -30,7 +30,7 @@
                     @foreach ($sectors as $sector)
                         <tr>
                             <td>{{ $sector->id }}</td>
-                            <td>{{ $sector->name }}</td>
+                            <td style="font-weight: bold; font-size:14px;">{{ $sector->name }}</td>
                             <td class="text-right">
                             <div class="dropdown dropdown-action">
                                     <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>

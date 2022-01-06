@@ -17,7 +17,7 @@ class PageController extends Controller
         if(Auth::user()->id == 1){
             $tasks = Task::all();
             $users = User::all();
-            $latest_tasks = Task::where('creator_id', Auth::user()->id)->paginate(4);
+            $latest_tasks = Task::where('creator_id', Auth::user()->id)->where('status', 'Inprogress')->paginate(4);
             return view('admin.index', [
                 'tasks' => $tasks,
                 'users_count' => $users->count(),

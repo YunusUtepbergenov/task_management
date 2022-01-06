@@ -63,7 +63,7 @@
 
     <!-- Statistics Widget -->
     <div class="row">
-        
+
         <div class="col-md-12 col-lg-6 col-xl-4 d-flex">
             <div class="card flex-fill">
                 <div class="card-body">
@@ -91,13 +91,13 @@
                         <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $tasks->where('status', 'Overdue')->count() / $tasks->count() * 100}}%" aria-valuenow="{{ $tasks->where('status', 'Overdue')->count() / $tasks->count() * 100}}" aria-valuemin="0" aria-valuemax="100">{{ $tasks->where('status', 'Overdue')->count() / $tasks->count() * 100}}%</div>
                     </div>
                     <div>
-                        <p><i class="fa fa-dot-circle-o text-purple mr-2"></i>Completed Tasks 
+                        <p><i class="fa fa-dot-circle-o text-purple mr-2"></i>Completed Tasks
                             <span class="float-right">{{ $tasks->where('status', 'Completed')->count() }}</span>
                         </p>
-                        <p><i class="fa fa-dot-circle-o text-warning mr-2"></i>Inprogress Tasks 
+                        <p><i class="fa fa-dot-circle-o text-warning mr-2"></i>Inprogress Tasks
                             <span class="float-right">{{ $tasks->where('status', 'Inprogress')->count() }}</span>
                         </p>
-                        <p><i class="fa fa-dot-circle-o text-danger mr-2"></i>Overdue 
+                        <p><i class="fa fa-dot-circle-o text-danger mr-2"></i>Overdue
                             <span class="float-right">{{ $tasks->where('status', 'Overdue')->count() }}</span>
                         </p>
                     </div>
@@ -124,6 +124,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($latest_tasks as $task)
+                                @can('overdue', $task)
                                     <tr>
                                         <td>
                                             <h2><a href="#">{{ $task->name }}</a></h2>
@@ -139,17 +140,18 @@
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown dropdown-action">
-                                                <a href="{{ route('task.show', $task->id) }}" class="action-icon">View</a>
+                                                <a href="{{ route('tasks.show', $task->id) }}" class="action-icon">View</a>
                                             </div>
                                         </td>
-                                    </tr>                                    
+                                    </tr>
+                                @endcan
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="projects.html">View all projects</a>
+                    <a href="#">View all projects</a>
                 </div>
             </div>
         </div>

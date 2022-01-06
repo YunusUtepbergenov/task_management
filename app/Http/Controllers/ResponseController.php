@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\TaskSubmittedEvent;
 use App\Models\Task;
 use App\Models\Response;
 use Illuminate\Http\Request;
@@ -11,10 +12,10 @@ use Illuminate\Support\Facades\Storage;
 class ResponseController extends Controller
 {
     public function store(Request $request){
-        
+
         $request->validate([
             'description' => 'required',
-            'filename' => 'nullable|file|max:40000' 
+            'filename' => 'nullable|file|max:40000'
         ]);
 
         $response = new Response;
@@ -41,6 +42,9 @@ class ResponseController extends Controller
         $task->save();
 
         $response->save();
+
+        event(new TaskSubmittedEvent($task));
+
         return redirect()->back();
     }
 
@@ -72,7 +76,7 @@ class ResponseController extends Controller
     public function update($id, Request $request){
         $request->validate([
             'description' => 'required',
-            'filename' => 'nullable|file|max:40000' 
+            'filename' => 'nullable|file|max:40000'
         ]);
 
         $response = Response::find($id);

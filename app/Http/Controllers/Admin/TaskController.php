@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Task;
-use App\Models\Sector;
-use App\Models\Response;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Events\TaskCreatedEvent;
+use App\Events\TaskUpdatedEvent;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -136,7 +136,7 @@ class TaskController extends Controller
         }
         $task->save();
 
-        // event(new TaskCreatedEvent($task));
+        event(new TaskUpdatedEvent($task));
 
         return redirect()->back();
     }
@@ -168,10 +168,10 @@ class TaskController extends Controller
         return view('user.tasks.finished', ['tasks' => $tasks]);
     }
 
-    
+
     public function userTask($id){
         $task = Task::where('id', $id)->first();
-        return view('user.tasks.view', ['task' => $task]);    
+        return view('user.tasks.view', ['task' => $task]);
     }
 
     public function downlaod($id, $taskfile){
@@ -187,5 +187,10 @@ class TaskController extends Controller
     public function sectorCompleted(){
         $tasks = Auth::user()->sector->tasks()->where('user_id', '<>', Auth::user()->id)->where('status', 'Completed')->paginate(10);
         return view('user.tasks.completed', ['tasks' => $tasks]);
+    }
+
+    public function overdue(){
+        $tasks = $tasks = Task::where('creator_id', 1)->where('deadline', '<', Carbon::now())->where('status', 'Inprogress')->orderBy('deadline', 'ASC')->paginate(20);
+        return view('admin.tasks.overdue', ['tasks' => $tasks]);
     }
 }

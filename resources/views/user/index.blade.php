@@ -79,7 +79,7 @@
                                     <td>{{ $task->status }}</td>
                                     <td>{{ $task->created_at->format('Y-m-d') }}</td>
                                     <td><a href="{{ route('user.task', $task->id) }}">View</a></td>
-                                </tr>                                    
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>

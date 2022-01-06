@@ -4,14 +4,15 @@ namespace App\Notifications;
 
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Notification;
 
-class NewTaskNotification extends Notification implements ShouldQueue
+class UpdatedTaskInformation extends Notification implements ShouldQueue
 {
     use Queueable;
 
     private $task;
+
     /**
      * Create a new notification instance.
      *

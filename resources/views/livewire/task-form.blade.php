@@ -1,6 +1,6 @@
 <div>
     <div class="modal-body">
-        <form action="{{ route('task.store') }}" method="POST" enctype="multipart/form-data" id="createTask">
+        <form action="{{ route('tasks.store') }}" method="POST" enctype="multipart/form-data" id="createTask">
             @csrf
             <div class="row">
                 <div class="col-sm-12">
@@ -54,7 +54,7 @@
                                     <option value="{{ $employee->id }}">{{ $employee->name }}</option>
                                 @endforeach
                             @endif
-                        </select>                                
+                        </select>
                     </div>
                     <div class="alert alert-danger d-none" id="user_id"></div>
                 </div>
@@ -84,6 +84,6 @@
     //             @this.set('deadline', e.target.value);
     //             $('#deadline').toggle(true);
     //         });
-    // }); 
-</script>     
+    // });
+</script>
 @endpush

@@ -6,7 +6,7 @@
     <!-- Datetimepicker CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}">
     <!-- Summernote CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/dist/summernote-bs4.css') }}">    
+    <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/dist/summernote-bs4.css') }}">
 @endsection
 
 @section('main')
@@ -22,10 +22,6 @@
             </div>
             <div class="col-auto float-right ml-auto">
                 <a href="#" class="btn add-btn" data-toggle="modal" data-target="#create_project"><i class="fa fa-plus"></i> Create Task</a>
-                <div class="view-icons">
-                    <a href="projects.html" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
-                    <a href="project-list.html" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
-                </div>
             </div>
         </div>
     </div>
@@ -41,9 +37,9 @@
     <!-- Datetimepicker JS -->
     <script src="{{ asset('assets/js/moment.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
-    
+
     <!-- Summernote JS -->
-    <script src="{{ asset('assets/plugins/summernote/dist/summernote-bs4.min.js') }}"></script>    
+    <script src="{{ asset('assets/plugins/summernote/dist/summernote-bs4.min.js') }}"></script>
     <script>
         $(document).ready(function(){
         $("#name").addClass("d-none");

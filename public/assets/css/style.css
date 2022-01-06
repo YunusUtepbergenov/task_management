@@ -3727,7 +3727,7 @@ table.dataTable thead > tr > td.sorting {
 }
 .notifications .noti-content {
     width: 350px;
-    overflow-y: auto;
+    overflow-y: unset;
     position: relative;
 }
 .notifications .notification-heading {
@@ -8809,7 +8809,7 @@ ul.comment-list li ul.children {
     position: relative;
     height: 100%;
     float: right;
-    margin: 8px;
+    margin-top: 8px;
     border-left: solid 2px #000;
 }
 

@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use Carbon\Carbon;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -90,5 +91,9 @@ class TaskPolicy
     public function forceDelete(User $user, Task $task)
     {
         //
+    }
+
+    public function overdue(User $user, Task $task){
+        return $task->deadline > Carbon::now();
     }
 }

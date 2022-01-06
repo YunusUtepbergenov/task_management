@@ -6,7 +6,7 @@
     <!-- Datetimepicker CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}">
     <!-- Summernote CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/dist/summernote-bs4.css') }}">    
+    <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/dist/summernote-bs4.css') }}">
 @endsection
 
 @section('main')
@@ -51,15 +51,17 @@
                             </thead>
                             <tbody>
                                 @foreach ($tasks as $task)
-                                <tr>
-                                    <td>{{ $task->user->name }}</td>
-                                    <td>{{ $task->name }}</td>
-                                    <td>{{ $task->priority }}</td>
-                                    <td>{{ $task->deadline }}</td>
-                                    <td>{{ $task->status }}</td>
-                                    <td>{{ $task->created_at->format('Y-m-d') }}</td>
-                                    <td><a class="btn btn-primary" href="{{ route('user.task', $task->id) }}">View</a></td>
-                                </tr>                                    
+                                    @can('overdue', $task)
+                                        <tr>
+                                            <td>{{ $task->user->name }}</td>
+                                            <td>{{ $task->name }}</td>
+                                            <td>{{ $task->priority }}</td>
+                                            <td>{{ $task->deadline }}</td>
+                                            <td>{{ $task->status }}</td>
+                                            <td>{{ $task->created_at->format('Y-m-d') }}</td>
+                                            <td><a class="btn btn-primary" href="{{ route('user.task', $task->id) }}">View</a></td>
+                                        </tr>
+                                    @endcan
                                 @endforeach
                             </tbody>
                         </table>
@@ -84,7 +86,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('task.store') }}" method="POST" enctype="multipart/form-data" id="createTask">
+                    <form action="{{ route('tasks.store') }}" method="POST" enctype="multipart/form-data" id="createTask">
                         @csrf
                         <div class="row">
                             <div class="col-sm-12">
@@ -126,10 +128,10 @@
                                         <option value="" disabled selected>Select Task Leader</option>
                                             @foreach (Auth::user()->sector->users as $employee)
                                                 @if ($employee->name !== Auth::user()->name)
-                                                    <option value="{{ $employee->id }}">{{ $employee->name }}</option>                                                
+                                                    <option value="{{ $employee->id }}">{{ $employee->name }}</option>
                                                 @endif
                                             @endforeach
-                                    </select>                                
+                                    </select>
                                 </div>
                                 <div class="alert alert-danger" id="user_id"></div>
                             </div>
@@ -164,10 +166,10 @@
     <!-- Datetimepicker JS -->
     <script src="{{ asset('assets/js/moment.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
-    
+
     <!-- Summernote JS -->
-    <script src="{{ asset('assets/plugins/summernote/dist/summernote-bs4.min.js') }}"></script>   
-    
+    <script src="{{ asset('assets/plugins/summernote/dist/summernote-bs4.min.js') }}"></script>
+
     <script>
         $(document).ready(function(){
             console.log('jeo');

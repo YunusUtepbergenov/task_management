@@ -8,7 +8,7 @@
             <h3 class="page-title">Task Information</h3>
             <ul class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Project</li>
+                <li class="breadcrumb-item active">Task Information</li>
             </ul>
         </div>
         <div class="col-auto float-right ml-auto">
@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="files-info">
                                     <span class="file-name text-ellipsis"><a href="{{ route('download.taskfile', [$task->id, $task->file])}}">{{ $task->file }}</a></span>
-                                    {{-- <div class="file-size">{{Storage::size(storage_path('/app/files/'.$task->file))}}</div> --}}
+                                    <div class="file-size">{{ round(Storage::size('/files/'.$task->file) / 1024, 1)  }} KB</div>
                                 </div>
                                 <ul class="files-action">
                                     <li class="dropdown dropdown-action">
@@ -71,20 +71,20 @@
                             @if ($task->response->filename)
                             <div class="files-info">
                                 <span class="file-name text-ellipsis"><a href="{{ route('download.responsefile', [$task->response->id, $task->response->filename])}}">{{ $task->response->filename }}</a></span>
-                                {{-- <div class="file-size">{{ Storage::size(storage_path('/app/files/responses/'.$task->response->filename)) }}</div> --}}
-                            </div>                                
+                                <div class="file-size">{{ round(Storage::size('/files/responses/'.$task->response->filename) / 1024, 1)  }} KB</div>
+                            </div>
                             @endif
                         </div>
                     </li>
                 </ul>
             </div>
-        </div>       
+        </div>
         @endif
         </div>
     <div class="col-lg-4 col-xl-3">
         <div class="card">
             <div class="card-body">
-                <h6 class="card-title m-b-15">Project details</h6>
+                <h6 class="card-title m-b-15">Task details</h6>
                 <table class="table table-striped table-border">
                     <tbody>
                         <tr>

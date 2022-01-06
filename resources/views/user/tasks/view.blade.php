@@ -8,7 +8,7 @@
             <h3 class="page-title">Task Information</h3>
             <ul class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Project</li>
+                <li class="breadcrumb-item active">Task information</li>
             </ul>
         </div>
     </div>
@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="files-info">
                                     <span class="file-name text-ellipsis"><a href="{{ route('download.taskfile', [$task->id, $task->file])}}">{{ $task->file }}</a></span>
-                                    {{-- <div class="file-size">{{ Storage::size(storage_path('/app/files/'.$task->file)) }}</div> --}}
+                                    <div class="file-size">{{ round(Storage::size('/files/'.$task->file) / 1024, 1)  }} KB</div>
                                 </div>
                             </div>
                         </li>
@@ -46,40 +46,42 @@
             </div>
         @endif
         @if ($task->status !== "Completed" && $task->user_id == Auth::user()->id)
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title mb-0">Complete Task</h4>
-            </div>
-            <div class="card-body">
-                <form action="{{ route('response.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group row">
-                        <label class="col-lg-2 col-form-label">Text</label>
-                        <div class="col-lg-10">
-                            @error('description')
-                                <div class="alert alert-danger" style="margin-bottom: 10px">{{ $message }}</div>
-                            @enderror
-                            <textarea rows="5" cols="5" class="form-control" name="description" placeholder="Enter text here"></textarea>
-                        </div>
-                        
-                    </div>
-                    <input type="hidden" name="task_id" value="{{ $task->id }}">
-                    <div class="form-group row">
-                        <label class="col-lg-2 col-form-label">File</label>
-                        <div class="col-lg-10">
-                            @error('filename')
-                                <div class="alert alert-danger" style="margin-bottom: 10px">{{ $message }}</div>
-                            @enderror
-                            <input class="form-control" name="filename" type="file">
-                        </div>
-                    </div>
+        @can('overdue', $task)
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Complete Task</h4>
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('response.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label">Text</label>
+                            <div class="col-lg-10">
+                                @error('description')
+                                    <div class="alert alert-danger" style="margin-bottom: 10px">{{ $message }}</div>
+                                @enderror
+                                <textarea rows="5" cols="5" class="form-control" name="description" placeholder="Enter text here"></textarea>
+                            </div>
 
-                    <div class="text-right">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
+                        </div>
+                        <input type="hidden" name="task_id" value="{{ $task->id }}">
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label">File</label>
+                            <div class="col-lg-10">
+                                @error('filename')
+                                    <div class="alert alert-danger" style="margin-bottom: 10px">{{ $message }}</div>
+                                @enderror
+                                <input class="form-control" name="filename" type="file">
+                            </div>
+                        </div>
+
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
+        @endcan
         @elseif($task->status == "Completed")
         <div class="card">
             <div class="card-body">
@@ -94,21 +96,21 @@
                             @if($task->response->filename)
                             <div class="files-info">
                                 <span class="file-name text-ellipsis"><a href="{{ route('download.responsefile', [$task->response->id, $task->response->filename])}}">{{ $task->response->filename }}</a></span>
-                                {{-- <div class="file-size">{{ Storage::size(storage_path('/app/files/'.$task->file)) }}</div> --}}
+                                <div class="file-size">{{ round(Storage::size('/files/responses/'.$task->response->filename) / 1024, 1)  }} KB</div>
                             </div>
                             @endif
                         </div>
                     </li>
                 </ul>
             </div>
-        </div>       
+        </div>
         @endif
         </div>
-        
+
     <div class="col-lg-4 col-xl-3">
         <div class="card">
             <div class="card-body">
-                <h6 class="card-title m-b-15">Project details</h6>
+                <h6 class="card-title m-b-15">Task details</h6>
                 <table class="table table-striped table-border">
                     <tbody>
                         <tr>
@@ -133,20 +135,21 @@
                         </tr>
                         @if ($task->status == "Completed")
                             @can('update', $task->response)
-                                <tr>
-                                    <td>Action:</td>
-                                    <td class="nowrap">
-                                        <a href="{{ route('response.edit', $task->response->id) }}" class="btn btn-secondary btn-sm">Edit</a>
-                                        <form action="{{ route('response.delete', $task->response->id) }}" method="post">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">                                    
-                                            <button class="btn btn-primary btn-sm">Delete</button>
-                                        </form>                      
-                                    </td>
-                                </tr>                            
+                                @can('overdue', $task)
+                                    <tr>
+                                        <td>Actions:</td>
+                                        <td class="nowrap">
+                                            <a href="{{ route('response.edit', $task->response->id) }}" class="btn btn-secondary btn-sm" style="margin-bottom: 5px">Edit Response</a>
+                                            <form action="{{ route('response.delete', $task->response->id) }}" method="post">
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <button class="btn btn-primary btn-sm">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endcan
                             @endcan
                         @endif
-                        {{-- @endcan --}}
                     </tbody>
                 </table>
             </div>
@@ -156,7 +159,7 @@
                 <h6 class="card-title m-b-20">Assigned Leader</h6>
                 <ul class="list-box">
                     <li>
-                        <a href="profile.html">
+                        <a href="#">
                             <div class="list-item">
                                 <div class="list-left">
                                     <span class="avatar"><img alt="" src="{{ asset('assets/img/profiles/avatar-11.jpg') }}"></span>
