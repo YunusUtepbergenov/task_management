@@ -20,11 +20,11 @@
 		@yield('styles')
 		<!-- Main CSS -->
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-		@livewireStyles	
-    </head>	
+		@livewireStyles
+    </head>
     <body>
 		<!-- Main Wrapper -->
-        <div class="main-wrapper">		
+        <div class="main-wrapper">
 			<!-- Header -->
             <div class="header">
 				<!-- Logo -->
@@ -40,12 +40,12 @@
 						<span></span>
 						<span></span>
 					</span>
-				</a>	
+				</a>
 				<a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa fa-bars"></i></a>
-				
+
 				<!-- Header Menu -->
 				<ul class="nav user-menu">
-                    @include('partials._notifications')					
+                    @include('partials._notifications')
 
                     @include('partials._messages')
 
@@ -60,13 +60,13 @@
 							<a class="dropdown-item" href="settings.html">Settings</a>
 							<form action="{{ route('logout') }}" method="POST">
 								@csrf
-								<button class="dropdown-item">Logout</button>	
+								<button class="dropdown-item">Logout</button>
 							</form>
 						</div>
 					</li>
 				</ul>
 				<!-- /Header Menu -->
-				
+
 				<!-- Mobile Menu -->
 				<div class="dropdown mobile-user-menu">
 					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
@@ -77,15 +77,15 @@
 					</div>
 				</div>
 				<!-- /Mobile Menu -->
-				
+
             </div>
 			<!-- /Header -->
-			
+
             @include('partials._usersidebar')
-			
+
 			<!-- Page Wrapper -->
             <div class="page-wrapper">
-			
+
 				<!-- Page Content -->
                 <div class="content container-fluid">
                     @yield('main')
@@ -94,10 +94,10 @@
 
             </div>
 			<!-- /Page Wrapper -->
-			
+
         </div>
 		<!-- /Main Wrapper -->
-		
+
 		<!-- jQuery -->
         <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
 		<!-- Bootstrap Core JS -->

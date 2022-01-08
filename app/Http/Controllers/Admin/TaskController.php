@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\ExtendDeadlineEvent;
 use App\Models\Task;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
