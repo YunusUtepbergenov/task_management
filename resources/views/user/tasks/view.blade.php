@@ -16,7 +16,7 @@
 <!-- /Page Header -->
 
 <div class="row">
-    <div class="col-lg-8 col-xl-9">
+    <div class="col-lg-7 col-xl-8">
         <div class="card">
             <div class="card-body">
                 <div class="project-title">
@@ -107,7 +107,7 @@
         @endif
         </div>
 
-    <div class="col-lg-4 col-xl-3">
+    <div class="col-lg-5 col-xl-4">
         <div class="card">
             <div class="card-body">
                 <h6 class="card-title m-b-15">Task details</h6>
@@ -137,14 +137,31 @@
                             @can('update', $task->response)
                                 @can('overdue', $task)
                                     <tr>
-                                        <td>Actions:</td>
+                                        <td>Response Actions:</td>
                                         <td class="nowrap">
-                                            <a href="{{ route('response.edit', $task->response->id) }}" class="btn btn-secondary btn-sm" style="margin-bottom: 5px">Edit Response</a>
-                                            <form action="{{ route('response.delete', $task->response->id) }}" method="post">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <button class="btn btn-primary btn-sm">Delete</button>
-                                            </form>
+                                            <div class="row">
+                                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                                                        <a href="{{ route('response.edit', $task->response->id) }}" class="btn btn-secondary btn-sm">Edit</a>
+                                                    </div>
+                                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                                        <form action="{{ route('response.delete', $task->response->id) }}" method="post">
+                                                            <input type="hidden" name="_method" value="DELETE">
+                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                            <button class="btn btn-primary btn-sm">Delete</button>
+                                                        </form>
+                                                    </div>
+                                                {{-- <div class="col">
+                                                    <a href="{{ route('response.edit', $task->response->id) }}" class="btn btn-secondary btn-sm">Edit</a>
+                                                </div>
+                                                <div class="col">
+                                                    <form action="{{ route('response.delete', $task->response->id) }}" method="post">
+                                                        <input type="hidden" name="_method" value="DELETE">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <button class="btn btn-primary btn-sm">Delete</button>
+                                                    </form>                                                            
+                                                </div> --}}
+                                            </div>
                                         </td>
                                     </tr>
                                 @endcan
