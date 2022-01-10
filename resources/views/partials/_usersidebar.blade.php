@@ -17,6 +17,7 @@
                     <ul style="display: none;">
                         <li><a href="{{ route('tasks.active') }}">Active Tasks</a></li>
                         <li><a href="{{ route('tasks.finished') }}">Submitted Tasks</a></li>
+                        <li><a href="{{ route('user.overdue') }}">Overdue Tasks</a></li>
                         @if (Auth::user()->role_id == 2)
                         <li><a href="{{ route('tasks.sector') }}">Sector's Active Tasks</a></li>
                         <li><a href="{{ route('tasks.sector.completed') }}">Sector's Completed Tasks</a></li>

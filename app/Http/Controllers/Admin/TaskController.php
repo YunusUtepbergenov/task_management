@@ -194,4 +194,32 @@ class TaskController extends Controller
         $tasks = $tasks = Task::where('creator_id', 1)->where('deadline', '<', Carbon::now())->where('status', 'Inprogress')->orderBy('deadline', 'ASC')->paginate(20);
         return view('admin.tasks.overdue', ['tasks' => $tasks]);
     }
+
+    public function overdueUser(){
+        $overdue = Auth::user()->tasks()->where('deadline', '<', Carbon::now())->where('status', 'Inprogress')->orderBy('deadline', 'ASC')->paginate(16);
+        return view('user.tasks.overdue', ['overdue' => $overdue]);
+    }
+
+    public function extendDeadlineRequest(Request $request){
+        $task = Task::find($request->id);
+        $date = str_replace('/', '-', $request->deadline);
+        $request->deadline = date("Y-m-d", strtotime($date) );
+        event(new ExtendDeadlineEvent($task, $request->deadline));
+        return redirect()->back();
+    }
+
+    public function extendDeadline($id, Request $request){
+        $task = Task::where('id', $id)->first();
+
+        $task->deadline = $request->deadline;
+        $task->save();
+        // event(new ExtendDeadlineAcceptedEvent());
+        return redirect()->back();
+    }
+
+    public function rejectedDeadlineExtend(){
+        //event(new ExtendDeadlineDeclinedEvent());
+
+        return redirect()->back();
+    }
 }

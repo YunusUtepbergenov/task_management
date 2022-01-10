@@ -20,10 +20,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('task/info/byid/{id}', [PageController::class, 'getTaskInfo']);
     Route::resource('tasks',  TaskController::class);
     Route::put('task/info/update', [TaskController::class, 'update'])->name('task.update');
-    // Route::delete('task/destroy/{id}', [TaskController::class, 'destroy'])->name('task.delete');
-    // Route::get('/tasks/all', [TaskController::class, 'index'])->name('tasks.all');
-    // Route::post('tasks/all', [TaskController::class, 'store'])->name('task.store');
-    // Route::get('task/{id}', [TaskController::class, 'show'])->name('task.show');
 
         //Employee routes
     Route::get('employees/all', [PageController::class, 'employees'])->name('employees.all');
@@ -37,7 +33,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('task/sector/completed', [TaskController::class, 'sectorCompleted'])->name('tasks.sector.completed');
     Route::get('user/task/{id}', [TaskController::class, 'userTask'])->name('user.task');
     Route::post('user/task/response', [ResponseController::class, 'store'])->name('response.store');
-
+    Route::get('user/tasks/overdue/individual', [TaskController::class, 'overdueUser'])->name('user.overdue');
+    Route::post('user/extend/deadline/request', [TaskController::class, 'extendDeadlineRequest'])->name('extend.deadline');
+    Route::put('user/extend/deadline/request/{id}', [TaskController::class, 'extendDeadline'])->name('edit.deadline');
+    Route::post('user/extend/deadline/rejected', [TaskController::class, 'rejectedDeadlineExtend'])->name('extend.rejected');
         //Response Routes
     Route::get('response/edit/{id}', [ResponseController::class, 'editor'])->name('response.edit');
     Route::put('response/update/{id}', [ResponseController::class, 'update'])->name('response.update');

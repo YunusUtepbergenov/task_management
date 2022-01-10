@@ -36,12 +36,13 @@ class ExtendDeadlineNotification extends Notification
 
     public function toArray($notifiable)
     {
-        $user = User::find($this->task->user_id)->first();
+        $user1 = User::where('id', $this->task->user_id)->first();
         return [
             'task_id' => $this->task->id,
+            'name' => $this->task->name,
             'new_deadline' => $this->deadline,
             'old_deadline'=> $this->task->deadline,
-            'leader_name' => $user->name,
+            'leader_name' => $user1->name,
         ];
     }
 }
