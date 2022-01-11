@@ -10,7 +10,6 @@
         <div class="noti-content">
             <ul class="notification-list">
                 @foreach (auth()->user()->unreadNotifications as $notification)
-
                     @if ($notification->type == "App\Notifications\UpdatedTaskInformation")
                         <li class="notification-message">
                             <div class="notification-action">
@@ -33,25 +32,25 @@
                         </li>
 
                         @elseif ($notification->type == "App\Notifications\SubmittedTaskNotification")
-                        <li class="notification-message">
-                            <div class="notification-action">
-                                {{-- <a href="#" class="action-icon"><i class="fa fa-trash" aria-hidden="true"></i></a> --}}
-                                <form method="POST" action="{{ route('notification.read', $notification->id) }}">
-                                    <input type="hidden" name="_method" value="PUT">
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <button class="action-icon"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                </form>
-                            </div>
-                            <div class="media">
-                                <span class="avatar">
-                                    <img alt="" src="{{ asset('assets/img/profiles/avatar.png') }}">
-                                </span>
-                                <div class="media-body">
-                                    <p class="noti-details"><span class="noti-title">{{ $notification->data["leader_name"] }}</span> submitted <span class="noti-title">{{ $notification->data['name'] }}</span> task</p>
-                                    <p class="noti-time"><span class="notification-time">{{ \App\Helpers\AppHelper::time_elapsed_string($notification->created_at) }}</span></p>
+                            <li class="notification-message">
+                                <div class="notification-action">
+                                    {{-- <a href="#" class="action-icon"><i class="fa fa-trash" aria-hidden="true"></i></a> --}}
+                                    <form method="POST" action="{{ route('notification.read', $notification->id) }}">
+                                        <input type="hidden" name="_method" value="PUT">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <button class="action-icon"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    </form>
                                 </div>
-                            </div>
-                        </li>
+                                <div class="media">
+                                    <span class="avatar">
+                                        <img alt="" src="{{ asset('assets/img/profiles/avatar.png') }}">
+                                    </span>
+                                    <div class="media-body">
+                                        <p class="noti-details"><span class="noti-title">{{ $notification->data["leader_name"] }}</span> submitted <span class="noti-title">{{ $notification->data['name'] }}</span> task</p>
+                                        <p class="noti-time"><span class="notification-time">{{ \App\Helpers\AppHelper::time_elapsed_string($notification->created_at) }}</span></p>
+                                    </div>
+                                </div>
+                            </li>
 
                         @elseif ($notification->type == "App\Notifications\UpdatedResponseNotification")
                             <li class="notification-message">
@@ -96,7 +95,7 @@
                                 </div>
                             </li>
 
-                            @elseif($notification->type == "App\Notifications\ExtendDeadlineNotification")
+                        @elseif($notification->type == "App\Notifications\ExtendDeadlineNotification")
                             <li class="notification-message">
                                 <div class="notification-action">
                                     <form method="POST" action="{{ route('notification.read', $notification->id) }}">
@@ -113,15 +112,19 @@
                                         <p class="noti-details"><span class="noti-title">{{ $notification->data["leader_name"] }}</span> wants you to extend deadline of task <span class="noti-title">{{ $notification->data['name'] }}</span> from <span class="noti-title">{{ $notification->data['old_deadline'] }}</span> to <span class="noti-title">{{ $notification->data['new_deadline'] }}</span></p>
                                         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="margin: 8px;">
                                             <div class="btn-group mr-2" role="group" aria-label="First group">
-                                                <form action="{{ route('edit.deadline', $notification->data['task_id']) }}">
+                                                <form method="POST" action="{{ route('edit.deadline', $notification->data['task_id']) }}">
                                                     <input type="hidden" name="_method" value="PUT">
                                                     <input type="hidden" id="generatedToken" name="_token" value="{{ csrf_token() }}">
+                                                    <input type="hidden" name="notification_id" value="{{ $notification->id }}">
                                                     <input type="hidden" name="deadline" value="{{ $notification->data['new_deadline'] }}">
                                                     <button class="btn btn-info btn-sm">Accept</button>
                                                 </form>
                                             </div>
                                             <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                <form action="#">
+                                                <form method="POST" action="{{ route('extend.rejected', $notification->data['task_id']) }}">
+                                                    @csrf
+                                                    <input type="hidden" name="notification_id" value="{{ $notification->id }}">
+                                                    <input type="hidden" name="id" id="{{ $notification->data['task_id'] }}">
                                                     <button class="btn btn-primary btn-sm">Decline</button>
                                                 </form>
                                             </div>
@@ -130,7 +133,46 @@
                                     </div>
                                 </div>
                             </li>
-                            @endif
+                        @elseif($notification->type == "App\Notifications\AcceptedExtendNotification")
+                            <li class="notification-message">
+                                <div class="notification-action">
+                                    <form method="POST" action="{{ route('notification.read', $notification->id) }}">
+                                        <input type="hidden" name="_method" value="PUT">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <button class="action-icon"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    </form>
+                                </div>
+                                <div class="media">
+                                    <span class="avatar">
+                                        <img alt="" src="{{ asset('assets/img/profiles/avatar.png') }}">
+                                    </span>
+                                    <div class="media-body">
+                                        <p class="noti-details"><span class="noti-title">{{ $notification->data["creator_name"] }}</span> extended deadline of your task <span class="noti-title">{{ $notification->data['name'] }}</span></p>
+                                        <p class="noti-time"><span class="notification-time">{{ \App\Helpers\AppHelper::time_elapsed_string($notification->created_at) }}</span></p>
+                                    </div>
+                                </div>
+                            </li>
+                        @elseif($notification->type == "App\Notifications\RejectedExtendNotification")
+                            <li class="notification-message">
+                                <div class="notification-action">
+                                    <form method="POST" action="{{ route('notification.read', $notification->id) }}">
+                                        <input type="hidden" name="_method" value="PUT">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <button class="action-icon"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    </form>
+                                </div>
+                                <div class="media">
+                                    <span class="avatar">
+                                        <img alt="" src="{{ asset('assets/img/profiles/avatar.png') }}">
+                                    </span>
+                                    <div class="media-body">
+                                        <p class="noti-details"><span class="noti-title">{{ $notification->data["creator_name"] }}</span> declined deadline extension of your task <span class="noti-title">{{ $notification->data['name'] }}</span></p>
+                                        <p class="noti-time"><span class="notification-time">{{ \App\Helpers\AppHelper::time_elapsed_string($notification->created_at) }}</span></p>
+                                    </div>
+                                </div>
+                            </li>
+
+                        @endif
                 @endforeach
             </ul>
         </div>

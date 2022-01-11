@@ -20,9 +20,6 @@
                     <li class="breadcrumb-item active">Overdue Tasks</li>
                 </ul>
             </div>
-            <div class="col-auto float-right ml-auto">
-                <a href="#" class="btn add-btn" data-toggle="modal" data-target="#create_project"><i class="fa fa-plus"></i> Create Task</a>
-            </div>
         </div>
     </div>
     <div class="row">
@@ -38,8 +35,9 @@
                                 </div>
                             </div>
                             <h4 class="project-title"><a href="{{ route('tasks.show', $task->id) }}">{{ $task->name }}</a></h4>
-                            <a href="{{ route('tasks.show', $task->id) }}"><p class="text-muted">{{substr($task->description, 0, 40)}} ...
-                            </p></a>
+                            <a href="{{ route('tasks.show', $task->id) }}">
+                                <p class="text-muted"> {{ (strlen($task->description) >= 48) ? substr($task->description, 0, 48)."..." : $task->description}}</p>
+                            </a>
                             <div class="pro-deadline m-b-15">
                                 <div class="sub-title">
                                     Deadline:

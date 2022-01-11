@@ -2,15 +2,19 @@
 
 namespace App\Providers;
 
+use App\Events\ExtendDeadlineAcceptedEvent;
 use App\Events\ExtendDeadlineEvent;
+use App\Events\ExtendDeadlineRejectedEvent;
 use App\Events\ResponseUpdatedEvent;
 use App\Events\TaskCreatedEvent;
 use App\Events\TaskSubmittedEvent;
 use App\Events\TaskUpdatedEvent;
+use App\Listeners\SendAcceptedExtendNotification;
 use App\Listeners\SendExtendDeadlineNotification;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use App\Listeners\SendNewTaskNotification;
+use App\Listeners\SendRejectedExtendNotification;
 use App\Listeners\SendSubmittedTaskNotification;
 use App\Listeners\SendUpdatedResponseNotification;
 use App\Listeners\SendUpdatedTaskNotification;
@@ -39,6 +43,12 @@ class EventServiceProvider extends ServiceProvider
         ],
         ExtendDeadlineEvent::class => [
             SendExtendDeadlineNotification::class,
+        ],
+        ExtendDeadlineAcceptedEvent::class => [
+            SendAcceptedExtendNotification::class,
+        ],
+        ExtendDeadlineRejectedEvent::class => [
+            SendRejectedExtendNotification::class,
         ],
         // Registered::class => [
         //     SendEmailVerificationNotification::class,

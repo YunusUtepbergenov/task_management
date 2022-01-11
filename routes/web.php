@@ -12,6 +12,9 @@ Route::middleware(['auth'])->group(function () {
         return view('admin.activities');
     });
 
+    // Route::prefix('admin')->group(function () {
+
+    // });
     // Admin Routes
         //Task Routes
     Route::get('tasks/taskboard', [PageController::class, 'taskboard'])->name('tasks.taskboard');
@@ -36,7 +39,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('user/tasks/overdue/individual', [TaskController::class, 'overdueUser'])->name('user.overdue');
     Route::post('user/extend/deadline/request', [TaskController::class, 'extendDeadlineRequest'])->name('extend.deadline');
     Route::put('user/extend/deadline/request/{id}', [TaskController::class, 'extendDeadline'])->name('edit.deadline');
-    Route::post('user/extend/deadline/rejected', [TaskController::class, 'rejectedDeadlineExtend'])->name('extend.rejected');
+    Route::post('user/extend/deadline/rejected/{id}', [TaskController::class, 'rejectedDeadlineExtend'])->name('extend.rejected');
+
         //Response Routes
     Route::get('response/edit/{id}', [ResponseController::class, 'editor'])->name('response.edit');
     Route::put('response/update/{id}', [ResponseController::class, 'update'])->name('response.update');
@@ -47,7 +51,3 @@ Route::middleware(['auth'])->group(function () {
         //Notification Routes
     Route::put('/notification/read/{id}', [PageController::class, 'read'])->name('notification.read');
 });
-
-// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-//     return view('dashboard');
-// })->name('dashboard');

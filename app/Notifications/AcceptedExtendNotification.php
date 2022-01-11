@@ -5,9 +5,10 @@ namespace App\Notifications;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class UpdatedTaskInformation extends Notification implements ShouldQueue
+class AcceptedExtendNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -34,19 +35,12 @@ class UpdatedTaskInformation extends Notification implements ShouldQueue
         return ['database'];
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function toArray($notifiable)
     {
         $user = User::where('id', $this->task->creator_id)->first();
         return [
             'name' => $this->task->name,
             'creator_name' => $user->name,
-            'task_id' => $this->task->id,
             'creator_id' => $user->id,
             'created_at' => $this->task->created_at
         ];

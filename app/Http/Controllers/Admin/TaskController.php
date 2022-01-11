@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\ExtendDeadlineAcceptedEvent;
 use App\Events\ExtendDeadlineEvent;
+use App\Events\ExtendDeadlineRejectedEvent;
 use App\Models\Task;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -210,15 +212,19 @@ class TaskController extends Controller
 
     public function extendDeadline($id, Request $request){
         $task = Task::where('id', $id)->first();
+        Auth::user()->unreadNotifications->where('id', $request->notification_id)->markAsRead();
 
         $task->deadline = $request->deadline;
         $task->save();
-        // event(new ExtendDeadlineAcceptedEvent());
+        event(new ExtendDeadlineAcceptedEvent($task));
         return redirect()->back();
     }
 
-    public function rejectedDeadlineExtend(){
-        //event(new ExtendDeadlineDeclinedEvent());
+    public function rejectedDeadlineExtend($id, Request $request){
+        $task = Task::where('id', $id)->first();
+        Auth::user()->unreadNotifications->where('id', $request->notification_id)->markAsRead();
+
+        event(new ExtendDeadlineRejectedEvent($task));
 
         return redirect()->back();
     }
