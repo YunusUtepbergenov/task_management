@@ -21,15 +21,16 @@
                         @if (Auth::user()->role_id == 2)
                         <li><a href="{{ route('tasks.sector') }}">Sector's Active Tasks</a></li>
                         <li><a href="{{ route('tasks.sector.completed') }}">Sector's Completed Tasks</a></li>
+                        <li><a href="{{ route('sector.overdue') }}">Sector's Overdue Tasks</a></li>
                         @endif
                     </ul>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{ route('user.activities') }}"><i class="la la-bell"></i> <span>Activities</span></a>
                 </li>
                 <li>
                     <a href="settings.html"><i class="la la-cog"></i> <span>Settings</span></a>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>

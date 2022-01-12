@@ -179,7 +179,7 @@
                         <a href="#">
                             <div class="list-item">
                                 <div class="list-left">
-                                    <span class="avatar"><img alt="" src="{{ asset('assets/img/profiles/avatar-11.jpg') }}"></span>
+                                    <span class="avatar"><img alt="" src="{{ asset('assets/img/profiles/avatar.png') }}"></span>
                                 </div>
                                 <div class="list-body">
                                     <span class="message-author">{{ $task->user->name }}</span>

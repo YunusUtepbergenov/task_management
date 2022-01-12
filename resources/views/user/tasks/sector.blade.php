@@ -79,7 +79,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('task.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('tasks.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-sm-12">

@@ -192,6 +192,13 @@ class TaskController extends Controller
         return view('user.tasks.completed', ['tasks' => $tasks]);
     }
 
+    public function sectorOverdue(){
+        $tasks = Auth::user()->sector->tasks()->where('user_id', '<>', Auth::user()->id)
+                                                ->where('status', 'Inprogress')
+                                                ->where('deadline', '<', Carbon::now())->paginate(10);
+        return view('user.tasks.sectors.overdue', ['tasks' => $tasks]);
+    }
+
     public function overdue(){
         $tasks = $tasks = Task::where('creator_id', 1)->where('deadline', '<', Carbon::now())->where('status', 'Inprogress')->orderBy('deadline', 'ASC')->paginate(20);
         return view('admin.tasks.overdue', ['tasks' => $tasks]);

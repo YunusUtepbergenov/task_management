@@ -28,12 +28,12 @@
                         <li><a href="{{ route('tasks.overdue') }}">Overdue Tasks</a></li>
                     </ul>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="/activities"><i class="la la-bell"></i> <span>Activities</span></a>
                 </li>
                 <li>
                     <a href="settings.html"><i class="la la-cog"></i> <span>Settings</span></a>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>

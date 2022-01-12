@@ -33,7 +33,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('task/active', [TaskController::class, 'active'])->name('tasks.active');
     Route::get('task/finished', [TaskController::class, 'finished'])->name('tasks.finished');
     Route::get('task/sector', [TaskController::class, 'sectorTasks'])->name('tasks.sector');
-    Route::get('task/sector/completed', [TaskController::class, 'sectorCompleted'])->name('tasks.sector.completed');
+    Route::get('user/task/sector/overdue', [TaskController::class, 'sectorOverdue'])->name('sector.overdue');
+    Route::get('/user/task/sector/completed', [TaskController::class, 'sectorCompleted'])->name('tasks.sector.completed');
     Route::get('user/task/{id}', [TaskController::class, 'userTask'])->name('user.task');
     Route::post('user/task/response', [ResponseController::class, 'store'])->name('response.store');
     Route::get('user/tasks/overdue/individual', [TaskController::class, 'overdueUser'])->name('user.overdue');
