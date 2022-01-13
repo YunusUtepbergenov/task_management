@@ -22,7 +22,7 @@
                 <div class="project-title">
                     <h3 class="card-title">{{ $task->name }}</h3>
                 </div>
-                <p>{{ $task->description }}</p>
+                <p>{!! nl2br(e($task->description)) !!}</p>
             </div>
         </div>
         @if($task->file)
