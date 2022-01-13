@@ -8,6 +8,7 @@ use App\Models\Sector;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class PageController extends Controller
 {
@@ -47,6 +48,27 @@ class PageController extends Controller
         return view('admin.employee.departments', [
             'sectors' => $sectors
         ]);
+    }
+
+    public function settings(){
+        return view('user.settings');
+    }
+
+    public function updatePassword(Request $request){
+        $request->validate([
+            'old_password' => 'required|min:6|max:20',
+            'new_password' => 'required|min:6|max:20',
+            'confirm_password' => 'required|same:new_password'
+        ]);
+
+        $user = Auth::user();
+        if(Hash::check($request->old_password, $user->password)){
+            $user->update([
+                'password' => bcrypt($request->new_password)
+            ]);
+            return redirect()->back();
+        }
+
     }
 
     public function userActivities(){

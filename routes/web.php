@@ -41,6 +41,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('user/extend/deadline/request', [TaskController::class, 'extendDeadlineRequest'])->name('extend.deadline');
     Route::put('user/extend/deadline/request/{id}', [TaskController::class, 'extendDeadline'])->name('edit.deadline');
     Route::post('user/extend/deadline/rejected/{id}', [TaskController::class, 'rejectedDeadlineExtend'])->name('extend.rejected');
+    Route::get('user/settings', [PageController::class, 'settings'])->name('user.settings');
+    Route::put('user/settings', [PageController::class, 'updatePassword'])->name('user.password');
 
         //Response Routes
     Route::get('response/edit/{id}', [ResponseController::class, 'editor'])->name('response.edit');

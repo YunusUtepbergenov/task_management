@@ -27,10 +27,10 @@
                 </li>
                 {{-- <li>
                     <a href="{{ route('user.activities') }}"><i class="la la-bell"></i> <span>Activities</span></a>
-                </li>
-                <li>
-                    <a href="settings.html"><i class="la la-cog"></i> <span>Settings</span></a>
                 </li> --}}
+                <li>
+                    <a href="{{ route('user.settings') }}"><i class="la la-cog"></i> <span>Settings</span></a>
+                </li>
             </ul>
         </div>
     </div>
