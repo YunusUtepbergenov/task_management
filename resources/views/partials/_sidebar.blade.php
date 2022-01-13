@@ -6,7 +6,7 @@
                 <li class="menu-title">
                     <span>Main</span>
                 </li>
-                <li class="submenu">
+                <li>
                     <a href="{{ route('home') }}"><i class="la la-dashboard"></i> <span> Dashboard</span></a>
                 </li>
                 <li class="menu-title">
