@@ -38,6 +38,41 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password')
         ],
         [
+            'name' => "Ф.Д.Давлетов",
+            'sector_id' => 4,
+            'role_id' => 2,
+            'email' => "f.davletov@cerr.uz",
+            'password' => Hash::make('password')
+        ],
+        [
+            'name' => "Б.Б.Хамидов",
+            'sector_id' => 5,
+            'role_id' => 2,
+            'email' => "b.khamidov@cerr.uz",
+            'password' => Hash::make('password')
+        ],
+        [
+            'name' => "Х.С.Хамидов",
+            'sector_id' => 6,
+            'role_id' => 2,
+            'email' => "k.khamidov@cerr.uz",
+            'password' => Hash::make('password')
+        ],
+        [
+            'name' => "М.М.Холмухамедов",
+            'sector_id' => 7,
+            'role_id' => 2,
+            'email' => "m.kholmukhamedov@cerr.uz",
+            'password' => Hash::make('password')
+        ],
+        [
+            'name' => "З.А.Ризаева",
+            'sector_id' => 8,
+            'role_id' => 2,
+            'email' => "z.rizaeva@cerr.uz",
+            'password' => Hash::make('password')
+        ],
+        [
             'name' => "Х.З.Мажидов",
             'sector_id' => 3,
             'role_id' => 3,

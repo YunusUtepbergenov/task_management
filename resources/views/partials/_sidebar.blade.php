@@ -16,7 +16,6 @@
                     <a href="#"><i class="la la-user"></i> <span> Employees</span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
                         <li><a href="{{ route('employees.all') }}">All Employees</a></li>
-                        {{-- <li><a href="attendance.html">Attendance (Admin)</a></li> --}}
                         <li><a href="{{ route('departments') }}">Departments</a></li>
                     </ul>
                 </li>
