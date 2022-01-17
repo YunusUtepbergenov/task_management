@@ -40,6 +40,7 @@ class AcceptedExtendNotification extends Notification implements ShouldQueue
         $user = User::where('id', $this->task->creator_id)->first();
         return [
             'name' => $this->task->name,
+            'task_id' => $this->task->id,
             'creator_name' => $user->name,
             'creator_id' => $user->id,
             'created_at' => $this->task->created_at

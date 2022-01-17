@@ -41,6 +41,7 @@ class UpdatedResponseNotification extends Notification implements ShouldQueue
             'name' => $this->response->task->name,
             'leader_name' => $user->name,
             'user_id' => $user->id,
+            'task_id' => $this->response->task->id,
         ];
     }
 }

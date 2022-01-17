@@ -39,6 +39,7 @@ class RejectedExtendNotification extends Notification implements ShouldQueue
         return [
             'name' => $this->task->name,
             'creator_name' => $user->name,
+            'task_id' => $this->task->id,
             'created_at' => $this->task->created_at
         ];
     }

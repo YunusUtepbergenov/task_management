@@ -12,7 +12,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/activities', function (){
         return view('admin.activities');
     });
-
+    Route::post('comments/task/store/{id}', [CommentController::class, 'store'])->name('comment.store');
     // Route::prefix('admin')->group(function () {
 
     // });
@@ -57,5 +57,6 @@ Route::middleware(['auth'])->group(function () {
 
 
         //Comment Routes
-    Route::resource('comment', CommentController::class);
+
+    // Route::resource('comments', CommentController::class);
 });

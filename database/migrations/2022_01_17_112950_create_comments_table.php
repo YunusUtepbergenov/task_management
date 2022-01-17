@@ -17,7 +17,7 @@ class CreateCommentsTable extends Migration
             $table->id();
             $table->foreignId('task_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->text('comments');
+            $table->text('comment');
             $table->timestamps();
         });
     }
@@ -30,6 +30,5 @@ class CreateCommentsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('comments');
-        $table->dropForeign(['task_id', ['user_id']]);
     }
 }

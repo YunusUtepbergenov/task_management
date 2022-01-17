@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
+use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -32,9 +35,22 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $task_id)
     {
-        //
+        $this->validate($request, [
+            'comment' => 'required|min:2|max:1000'
+        ]);
+
+        $task = Task::where('id', $task_id);
+
+        $comment = new Comment();
+        $comment->user_id = Auth::user()->id;
+        $comment->task_id = $task_id;
+        $comment->comment = $request->comment;
+
+        $comment->save();
+
+        return redirect()->back();
     }
 
     /**

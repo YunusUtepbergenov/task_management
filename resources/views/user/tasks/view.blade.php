@@ -105,6 +105,38 @@
             </div>
         </div>
         @endif
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title m-b-20">Comments</h5>
+                <div class="form-group">
+                    <form action="{{ route('comment.store', $task->id) }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="comment">Comment:</label>
+                            <textarea class="form-control" rows="2" name="comment" id="comment"></textarea>
+                        </div>
+
+                        <button class="btn btn-primary" style="float: right;">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-9">
+                @foreach ($task->comments as $comment)
+                    <div class="card p-3" style="margin-bottom: 15px;">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="user d-flex flex-row align-items-center">
+                                <img src="{{ asset('assets/img/profiles/avatar.png') }}" width="30" class="user-img rounded-circle mr-2">
+                                <span>
+                                    <small class="font-weight-bold text-primary" style="font-size: 14px">{{ $comment->user->name }}</small>
+                                    <small class="font-weight-bold" style="font-size: 13px; margin-left: 8px;">{{ $comment->comment }}</small>
+                                </span>
+                            </div>
+                            <small>{{ \App\Helpers\AppHelper::time_elapsed_string($comment->created_at) }}</small>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
         </div>
 
     <div class="col-lg-5 col-xl-4">
@@ -159,7 +191,7 @@
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                         <button class="btn btn-primary btn-sm">Delete</button>
-                                                    </form>                                                            
+                                                    </form>
                                                 </div> --}}
                                             </div>
                                         </td>

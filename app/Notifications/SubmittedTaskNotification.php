@@ -46,6 +46,7 @@ class SubmittedTaskNotification extends Notification implements ShouldQueue
         return [
             'name' => $this->task->name,
             'leader_name' => $user->name,
+            'task_id' => $this->task->id,
             'creator_id' => $user->id,
             'submitted_at' => $this->task->created_at
         ];
