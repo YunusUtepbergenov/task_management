@@ -9,11 +9,9 @@
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item active">Dashboard</li>
                 </ul>
-            </div>
+            </div   >
         </div>
     </div>
-    <!-- /Page Header -->
-    {{-- {{ dd(auth()->user()->unreadNotifications) }} --}}
     <div class="row">
         <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
             <div class="card dash-widget">
@@ -71,15 +69,17 @@
                             </thead>
                             <tbody>
                                 @foreach (Auth::user()->tasks()->where('status', 'Inprogress')->get() as $task)
-                                <tr>
-                                    <td>{{ Auth::user()->name }}</td>
-                                    <td>{{ $task->name }}</td>
-                                    <td>{{ $task->priority }}</td>
-                                    <td>{{ $task->deadline }}</td>
-                                    <td>{{ $task->status }}</td>
-                                    <td>{{ $task->created_at->format('Y-m-d') }}</td>
-                                    <td><a href="{{ route('user.task', $task->id) }}">View</a></td>
-                                </tr>
+                                    @can('overdue', $task)
+                                        <tr>
+                                            <td>{{ Auth::user()->name }}</td>
+                                            <td>{{ $task->name }}</td>
+                                            <td>{{ $task->priority }}</td>
+                                            <td>{{ $task->deadline }}</td>
+                                            <td>{{ $task->status }}</td>
+                                            <td>{{ $task->created_at->format('Y-m-d') }}</td>
+                                            <td><a href="{{ route('user.task', $task->id) }}">View</a></td>
+                                        </tr>                                    
+                                    @endcan
                                 @endforeach
                             </tbody>
                         </table>
