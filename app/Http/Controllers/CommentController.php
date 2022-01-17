@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommentStoredEvent;
 use App\Models\Comment;
 use App\Models\Task;
 use Illuminate\Http\Request;
@@ -41,7 +42,8 @@ class CommentController extends Controller
             'comment' => 'required|min:2|max:1000'
         ]);
 
-        $task = Task::where('id', $task_id);
+        $task = Task::where('id', $task_id)->first();
+        // dd($task->creator_id);
 
         $comment = new Comment();
         $comment->user_id = Auth::user()->id;
@@ -49,6 +51,12 @@ class CommentController extends Controller
         $comment->comment = $request->comment;
 
         $comment->save();
+
+        if(Auth::user()->id == $task->creator_id){
+            event(new CommentStoredEvent($comment, $task->user_id));
+        }else{
+            event(new CommentStoredEvent($comment, $task->creator_id));
+        }
 
         return redirect()->back();
     }

@@ -102,7 +102,6 @@ class ResponseController extends Controller
 
         $response->save();
         event(new ResponseUpdatedEvent($response));
-        event(new ExtendDeadlineEvent($response->task, '2022-01-15'));
         return redirect()->route('user.task', $response->task->id);
     }
 }

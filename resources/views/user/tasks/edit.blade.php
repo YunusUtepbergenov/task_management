@@ -37,7 +37,6 @@
                                 </div>
                                 <div class="files-info">
                                     <span class="file-name text-ellipsis"><a href="{{ route('download.taskfile', [$response->task->id, $response->task->file])}}">{{ $response->task->file }}</a></span>
-                                    {{-- <div class="file-size">{{ Storage::size(storage_path('/app/files/'.$task->file)) }}</div> --}}
                                 </div>
                             </div>
                         </li>
@@ -52,7 +51,7 @@
             <div class="card-body">
                 <form action="{{ route('response.update', $response->id) }}" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="_method" value="PUT">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">                                    
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group row">
                         <label class="col-lg-2 col-form-label">Text</label>
                         <div class="col-lg-10">
@@ -61,7 +60,7 @@
                             @enderror
                             <textarea rows="5" cols="5" class="form-control" name="description" placeholder="Enter text here">{{ $response->description }}</textarea>
                         </div>
-                        
+
                     </div>
                     <input type="hidden" name="task_id" value="{{ $response->task->id }}">
                     <div class="form-group row">
@@ -81,7 +80,7 @@
             </div>
         </div>
         </div>
-        
+
     <div class="col-lg-4 col-xl-3">
         <div class="card">
             <div class="card-body">

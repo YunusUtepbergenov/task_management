@@ -89,7 +89,7 @@ class UserSeeder extends Seeder
         [
             'name' => "Ю.Ш.Кутбитдинов",
             'sector_id' => 2,
-            'role_id' => 2,
+            'role_id' => 3,
             'email' => "qutbitdinov@cerr.uz",
             'password' => Hash::make('password')
         ]
