@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Comment;
 use App\Models\Response;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -28,5 +29,9 @@ class Task extends Model
 
     public function response(){
         return $this->hasOne(Response::class);
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
     }
 }

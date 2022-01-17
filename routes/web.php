@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\Admin\TaskController;
 
@@ -53,4 +54,8 @@ Route::middleware(['auth'])->group(function () {
 
         //Notification Routes
     Route::put('/notification/read/{id}', [PageController::class, 'read'])->name('notification.read');
+
+
+        //Comment Routes
+    Route::resource('comment', CommentController::class);
 });

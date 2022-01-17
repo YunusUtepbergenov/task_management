@@ -92,7 +92,7 @@ class UserSeeder extends Seeder
             'role_id' => 2,
             'email' => "qutbitdinov@cerr.uz",
             'password' => Hash::make('password')
-        ],
+        ]
         ]);
     }
 }
