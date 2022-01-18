@@ -5,7 +5,7 @@
 	<link rel="stylesheet" href="{{ asset('assets/css/select2.min.css') }}">
 	<!-- Datatable CSS -->
 	<link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
-			
+
 	<!-- Datetimepicker CSS -->
 	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}">
 @endsection
@@ -13,7 +13,7 @@
 @section('main')
 	<!-- Page Content -->
 	<div class="content container-fluid">
-	
+
 		<!-- Page Header -->
 		<div class="page-header">
 			<div class="row align-items-center">
@@ -27,7 +27,7 @@
 			</div>
 		</div>
 		<!-- /Page Header -->
-							
+
 		<div class="row">
 			<div class="col-md-12">
 				<div class="table-responsive">
@@ -45,14 +45,14 @@
 								<tr>
 									<td>
 										<h2 class="table-avatar">
-											<a href="#" class="avatar"><img alt="" src="{{ asset('assets/img/profiles/avatar-02.jpg') }}"></a>
-											<a href="#">{{ $employee->name }} <span>Web Designer</span></a>
+											<a href="#" class="avatar"><img alt="" src="{{ asset('assets/img/profiles/avatar.png') }}"></a>
+											<a href="#">{{ $employee->name }}</a>
 										</h2>
 									</td>
 									<td>{{ $employee->email }}</td>
 									<td class="text-wrap">{{ $employee->sector->name }}</td>
 									<td>{{ $employee->role->name }}</td>
-								</tr>								
+								</tr>
 							@endforeach
 						</tbody>
 					</table>
@@ -60,7 +60,7 @@
 			</div>
 		</div>
 
-	
+
 	</div>
 	<!-- /Page Content -->
 @endsection
@@ -73,5 +73,5 @@
 	<!-- Datatable JS -->
 	<script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
-	
+
 @endsection

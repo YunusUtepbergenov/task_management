@@ -16,7 +16,7 @@
             <div class="col">
                 <h3 class="page-title">Overdue Tasks</h3>
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
                     <li class="breadcrumb-item active">Overdue Tasks</li>
                 </ul>
             </div>
@@ -34,8 +34,8 @@
                                     <a class="dropdown-item" href="javascript:void(0)" onclick="editTask({{ $task->id }})" data-toggle="modal" data-target="#extend_deadline"><i class="fa fa-pencil m-r-5"></i> Extend Deadline Request</a>
                                 </div>
                             </div>
-                            <h4 class="project-title"><a href="{{ route('tasks.show', $task->id) }}">{{ $task->name }}</a></h4>
-                            <a href="{{ route('tasks.show', $task->id) }}">
+                            <h4 class="project-title"><a href="{{ route('user.task', $task->id) }}">{{ $task->name }}</a></h4>
+                            <a href="{{ route('user.task', $task->id) }}">
                                 <p class="text-muted"> {{ (strlen($task->description) >= 48) ? substr($task->description, 0, 48)."..." : $task->description}}</p>
                             </a>
                             <div class="pro-deadline m-b-15">

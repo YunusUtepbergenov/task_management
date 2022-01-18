@@ -7,7 +7,7 @@
         <div class="col-sm-12">
             <h3 class="page-title">Overdue Tasks</h3>
             <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
                 <li class="breadcrumb-item active">Overdue Tasks</li>
             </ul>
         </div>
@@ -44,7 +44,7 @@
                                 <td>{{ $task->deadline }}</td>
                                 <td>Overdue</td>
                                 <td>{{ $task->created_at->format('Y-m-d') }}</td>
-                                <td><a class="btn btn-primary" href="{{ route('tasks.show', $task->id) }}">View</a></td>
+                                <td><a class="btn btn-primary" href="{{ route('user.task', $task->id) }}">View</a></td>
                             </tr>
                             @endforeach
                         </tbody>

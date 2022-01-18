@@ -6,7 +6,7 @@
     <!-- Datetimepicker CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}">
     <!-- Summernote CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/dist/summernote-bs4.css') }}">    
+    <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/dist/summernote-bs4.css') }}">
 @endsection
 
 @section('main')
@@ -57,7 +57,7 @@
                                 <div>Assigned to :</div>
                                 <ul class="team-members">
                                     <li>
-                                        <a href="#" data-toggle="tooltip" title="Jeffery Lalor"><img alt="" src="{{ asset('assets/img/profiles/avatar-16.jpg') }}"></a>
+                                        <a href="#" data-toggle="tooltip" title="Jeffery Lalor"><img alt="" src="{{ asset('assets/img/profiles/avatar.png') }}"></a>
                                     </li>
                                     <li><p style="padding: 6px 0 0 10px;">{{ $task->user->name }}</p></li>
                                 </ul>
@@ -67,7 +67,7 @@
                 </div>
             @endcan
         @endforeach
-    </div>    
+    </div>
     <div style="float: right; margin-right: 30px;">
         {{ $tasks->links('pagination::bootstrap-4') }}
     </div>
@@ -146,7 +146,7 @@
     <!-- Datetimepicker JS -->
     <script src="{{ asset('assets/js/moment.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
-    
+
     <!-- Summernote JS -->
-    <script src="{{ asset('assets/plugins/summernote/dist/summernote-bs4.min.js') }}"></script>    
+    <script src="{{ asset('assets/plugins/summernote/dist/summernote-bs4.min.js') }}"></script>
 @endsection

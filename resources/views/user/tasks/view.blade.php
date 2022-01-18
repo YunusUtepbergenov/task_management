@@ -7,7 +7,7 @@
         <div class="col">
             <h3 class="page-title">Task Information</h3>
             <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
                 <li class="breadcrumb-item active">Task information</li>
             </ul>
         </div>
@@ -183,16 +183,6 @@
                                                             <button class="btn btn-primary btn-sm">Delete</button>
                                                         </form>
                                                     </div>
-                                                {{-- <div class="col">
-                                                    <a href="{{ route('response.edit', $task->response->id) }}" class="btn btn-secondary btn-sm">Edit</a>
-                                                </div>
-                                                <div class="col">
-                                                    <form action="{{ route('response.delete', $task->response->id) }}" method="post">
-                                                        <input type="hidden" name="_method" value="DELETE">
-                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                        <button class="btn btn-primary btn-sm">Delete</button>
-                                                    </form>
-                                                </div> --}}
                                             </div>
                                         </td>
                                     </tr>
